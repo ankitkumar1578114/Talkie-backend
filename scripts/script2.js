@@ -25,7 +25,7 @@ con.connect((err) => {
 });
 
 // CSV file name
-const fileName = "../../movie_dataset/credits.csv";
+const fileName = "../../movie_dataset/movies_metadata.csv";
 function importCSV(){
     console.log(fileName)
 
@@ -34,12 +34,12 @@ function importCSV(){
         // Fetching the data from each row
         // and inserting to the table "sample"
         var n=source.length;
-        var i=-1;
+        var i=0;
         setInterval(()=>{
             i++;
             console.log(i)
             try{
-            var movie=source[i].crew;
+            var movie=source[i].genres;
             movie=movie.replace(/{'/g,`{"`);
             movie=movie.replace(/':/g,`":`);
             movie=movie.replace(/, '/g,`, "`);
@@ -59,17 +59,17 @@ function importCSV(){
 
             // console.log("___________");
             var m=actors.length;
-            var movie_id=source[i].id;
+            // var movie_id=source[i].id;
             for(var j=0;j<m;j++){
                 var actor=actors[j];
                 // console.log(actor)
-                var actor_id = actor.id
-                var job = actor.job
-                var department = actor.department
+                var genre_id = actor.id
+                var genere_name = actor.name
+
                 // console.log(source);
                 var insertStatement =
-                `INSERT INTO movie_crew_mapping (movie_id,crew_id,job,department) values(?,?,?,?)`;
-                var items = [movie_id,actor_id,job,department];
+                `INSERT INTO genre (genre_id,name) values(?,?)`;
+                var items = [genre_id,genere_name];
                 console.log(items);
                 // console.log("___________");/
                 con.query(insertStatement, items,

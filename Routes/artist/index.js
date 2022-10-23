@@ -1,23 +1,18 @@
 const { query } = require("express");
 const conn =require('../../dbcon');
 const router = require("express").Router();
-
-const cast = require("./cast")
+const movie = require("./movie")
 const list = require("./list")
-const crew = require("./crew")
-
 router.get("/:id",(req,res)=>{
-    const movie_id = req.params.id;
-    conn.query("Select * from movie where movie_id=" + movie_id,(err,result)=>{
+    const actor_id = req.params.id;
+    conn.query("Select * from artist where actor_id=" + actor_id,(err,result)=>{
                 if(err) throw err;
-                // console.log(result);
                 res.send(result)
 
     });
 })
 
-router.use("/crew",crew);
-router.use("/cast",cast);
 router.use("/list",list);
+router.use("/movie",movie)
 
 module.exports = router;

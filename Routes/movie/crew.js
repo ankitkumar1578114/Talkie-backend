@@ -2,22 +2,13 @@ const { query } = require("express");
 const conn =require('../../dbcon');
 const router = require("express").Router();
 
-const cast = require("./cast")
-const list = require("./list")
-const crew = require("./crew")
-
 router.get("/:id",(req,res)=>{
     const movie_id = req.params.id;
-    conn.query("Select * from movie where movie_id=" + movie_id,(err,result)=>{
+    conn.query("SELECT cr.* from movie mv INNER JOIN movie_crew_mapping mcrm on mv.movie_id=mcrm.movie_id INNER JOIN crew cr on cr.crew_id=mcrm.crew_id WHERE mv.movie_id= " + movie_id,(err,result)=>{
                 if(err) throw err;
                 // console.log(result);
                 res.send(result)
-
     });
 })
-
-router.use("/crew",crew);
-router.use("/cast",cast);
-router.use("/list",list);
 
 module.exports = router;
