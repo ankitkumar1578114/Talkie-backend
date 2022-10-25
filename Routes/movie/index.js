@@ -5,6 +5,7 @@ const router = require("express").Router();
 const cast = require("./cast")
 const list = require("./list")
 const crew = require("./crew")
+const search = require("./search")
 
 router.get("/:id",(req,res)=>{
     const movie_id = req.params.id;
@@ -19,5 +20,6 @@ router.get("/:id",(req,res)=>{
 router.use("/crew",crew);
 router.use("/cast",cast);
 router.use("/list",list);
+router.use("/search",search);
 
 module.exports = router;

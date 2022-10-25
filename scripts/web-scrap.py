@@ -16,7 +16,8 @@ mycursor.execute("SELECT * FROM movie")
 myresult = mycursor.fetchall()
 import requests,webbrowser
 from bs4 import BeautifulSoup
-i=28000
+i=45428
+
 for z in myresult:
     x=myresult[i]
     i+=1

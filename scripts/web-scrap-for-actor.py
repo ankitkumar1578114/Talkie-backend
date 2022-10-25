@@ -16,7 +16,7 @@ mycursor.execute("SELECT * FROM artist")
 myresult = mycursor.fetchall()
 import requests,webbrowser
 from bs4 import BeautifulSoup
-i=35172
+i=58507
 for z in myresult:
     x=myresult[i]
     i+=1

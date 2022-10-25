@@ -34,12 +34,12 @@ function importCSV(){
         // Fetching the data from each row
         // and inserting to the table "sample"
         var n=source.length;
-        var i=-1;
+        var i=3230;
         setInterval(()=>{
             i++;
             console.log(i)
             try{
-            var movie=source[i].crew;
+            var movie=source[i].cast;
             movie=movie.replace(/{'/g,`{"`);
             movie=movie.replace(/':/g,`":`);
             movie=movie.replace(/, '/g,`, "`);
@@ -64,12 +64,11 @@ function importCSV(){
                 var actor=actors[j];
                 // console.log(actor)
                 var actor_id = actor.id
-                var job = actor.job
-                var department = actor.department
+                var charecter = actor.character
                 // console.log(source);
                 var insertStatement =
-                `INSERT INTO movie_crew_mapping (movie_id,crew_id,job,department) values(?,?,?,?)`;
-                var items = [movie_id,actor_id,job,department];
+                `UPDATE movie_cast_mapping SET character_name = ? where movie_id =`+movie_id+" and cast_id = "+actor_id;
+                var items = [charecter];
                 console.log(items);
                 // console.log("___________");/
                 con.query(insertStatement, items,
