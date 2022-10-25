@@ -11,7 +11,7 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
-mycursor.execute("SELECT * FROM artist  where google_url=''")
+mycursor.execute("SELECT * FROM artist  where google_url='' order by id desc")
 
 myresult = mycursor.fetchall()
 import requests,webbrowser

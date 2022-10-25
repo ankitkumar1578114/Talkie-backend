@@ -8,7 +8,7 @@ const router = require("express").Router();
 
 router.get("/:id",(req,res)=>{
     const search = req.params.id.toLowerCase();
-    conn.query("Select * from movie where LOWER(title) LIKE '%" + search +"%'",(err,result)=>{
+    conn.query("Select * from movie where LOWER(title) LIKE '%" + search +"%' LIMIT 10",(err,result)=>{
                 if(err) throw err;
                 // console.log(result);
                 res.send(result)
