@@ -34,7 +34,7 @@ function importCSV(){
         // Fetching the data from each row
         // and inserting to the table "sample"
         var n=source.length;
-        var i=0;
+        var i=-1;
         setInterval(()=>{
             i++;
             console.log(i)
@@ -59,7 +59,7 @@ function importCSV(){
 
             // console.log("___________");
             var m=actors.length;
-            // var movie_id=source[i].id;
+            var movie_id=source[i].id;
             for(var j=0;j<m;j++){
                 var actor=actors[j];
                 // console.log(actor)
@@ -68,8 +68,8 @@ function importCSV(){
 
                 // console.log(source);
                 var insertStatement =
-                `INSERT INTO genre (genre_id,name) values(?,?)`;
-                var items = [genre_id,genere_name];
+                `INSERT INTO movie_genre_mapping (movie_id,genre_id,genre_name) values(?,?,?)`;
+                var items = [movie_id,genre_id,genere_name];
                 console.log(items);
                 // console.log("___________");/
                 con.query(insertStatement, items,

@@ -2,10 +2,11 @@ const { query } = require("express");
 const conn =require('../../dbcon');
 const router = require("express").Router();
 
-router.get("/:id",(req,res)=>{
+router.get("/:name",(req,res)=>{
 
-    const offset = req.params.id;
-    conn.query("Select * from post Limit 10 OFFSET "+offset,(err,result)=>{
+    const name = req.params.name;
+    console.log("name")
+    conn.query("Select * from artist where name like '%"+name+"%'  Limit 10 ",(err,result)=>{
                 if(err) throw err;
                 res.send(result)
     });
