@@ -6,7 +6,7 @@ const router = require("express").Router();
 
         const offset = req.params.id;
         
-        conn.query("Select * from movie ORDER BY popularity desc Limit 15 OFFSET  "+offset,(err,result)=>{
+        conn.query("Select *,YEAR(release_date) as release_year from movie ORDER BY popularity desc Limit 15 OFFSET  "+offset,(err,result)=>{
                     if(err) throw err;
                     // console.log(result);
                     res.send(result)
@@ -20,7 +20,7 @@ const router = require("express").Router();
 
         const date= newDate.getDate();
         const month = newDate.getMonth()+1;
-        conn.query("SELECT * from movie where month(release_date) = "+month +" and day(release_date) = "+date,(err,result)=>{
+        conn.query("SELECT *,YEAR(release_date) as release_year from movie where month(release_date) = "+month +" and day(release_date) = "+date,(err,result)=>{
                     if(err) throw err;  
                     // console.log(result);
                     res.send(result)
@@ -33,7 +33,7 @@ const router = require("express").Router();
         const offset = 0;
         const lang=req.params.lang;
         
-        conn.query("Select * from movie where original_language = '"+lang+"' Order by popularity desc Limit 10 OFFSET "+offset,(err,result)=>{
+        conn.query("Select *,YEAR(release_date) as release_year from movie where original_language = '"+lang+"' Order by popularity desc Limit 10 OFFSET "+offset,(err,result)=>{
                     if(err) throw err;  
                     // console.log(result);
                     res.send(result)

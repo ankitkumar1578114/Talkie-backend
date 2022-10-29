@@ -39,7 +39,7 @@ function importCSV(){
             i++;
             console.log(i)
             try{
-            var movie=source[i].genres;
+            var movie=source[i].production_companies;
             movie=movie.replace(/{'/g,`{"`);
             movie=movie.replace(/':/g,`":`);
             movie=movie.replace(/, '/g,`, "`);
@@ -68,10 +68,10 @@ function importCSV(){
 
                 // console.log(source);
                 var insertStatement =
-                `INSERT INTO movie_genre_mapping (movie_id,genre_id,genre_name) values(?,?,?)`;
+                `INSERT INTO movie_production_company_mapping (movie_id,production_company_id,production_company_name) values(?,?,?)`;
                 var items = [movie_id,genre_id,genere_name];
                 console.log(items);
-                // console.log("___________");/
+            //     // console.log("___________");/
                 con.query(insertStatement, items,
                     (err, results, fields) => {
                     if (err) {

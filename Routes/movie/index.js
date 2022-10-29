@@ -11,7 +11,7 @@ const create = require("./create")
 router.get("/:id",(req,res)=>{
     var movie_id = req.params.id;
     var response_to_send = []
-    conn.query("Select * from movie where id=" + movie_id,(err,result)=>{
+    conn.query("Select *,YEAR(release_date) as release_year from movie where id=" + movie_id,(err,result)=>{
                 if(err) throw err;
                 response_to_send=result;
                 
@@ -30,7 +30,12 @@ router.get("/:id",(req,res)=>{
                             if(err) throw err;
                             response_to_send[0].genres=result;
 
-                            res.send(response_to_send)
+                            conn.query("SELECT mpcm.* FROM movie mv INNER JOIN movie_production_company_mapping mpcm on mv.movie_id = mpcm.movie_id where mv.movie_id="+movie_id2,(err,result)=>{
+                                if(err) throw err;
+                                response_to_send[0].production_companies=result;
+                                res.send(response_to_send)
+                            })
+            
                         });        
                    
                     }); 

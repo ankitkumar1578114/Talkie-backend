@@ -43,7 +43,7 @@ function importCSV(){
             var release_date = source[i].release_date;
 
             var insertStatement =
-            "UPDATE movie SET release_date=? where movie_id ="+movie_id;
+            "UPDATE movie SET release_date = ? where movie_id ="+movie_id;
             var items = [release_date];
             console.log(items);
             // console.log("___________");/
