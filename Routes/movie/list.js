@@ -37,10 +37,22 @@ const router = require("express").Router();
                     if(err) throw err;  
                     // console.log(result);
                     res.send(result)
+        });
 
     });
 
-})
+    router.get("/upcoming/:id",(req,res)=>{
+
+        const offset = 0;
+        const lang=req.params.lang;
+        
+        conn.query("Select * from upcoming_movie order by id desc LIMIT 10",(err,result)=>{
+                    if(err) throw err;  
+                    // console.log(result);
+                    res.send(result)
+
+        });    
+        })
 
 
 
